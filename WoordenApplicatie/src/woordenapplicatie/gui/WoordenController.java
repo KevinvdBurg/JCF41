@@ -74,7 +74,7 @@ public class WoordenController implements Initializable {
         Set<String> uniqWords = new HashSet<>();
 
         for(String w : words){
-            uniqWords.add(w.replaceAll("\\W", ""));
+            uniqWords.add(FilterWords(w));
         }
 
 
@@ -99,7 +99,7 @@ public class WoordenController implements Initializable {
 
 
         for(String w : words){
-            uniqWords.add(w.replaceAll("\\W", ""));
+            uniqWords.add(FilterWords(w));
         }
 
         for (String uw : uniqWords){
@@ -108,23 +108,30 @@ public class WoordenController implements Initializable {
 
 
         taOutput.setText(output);
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        String output = "";
+        String[] words = DEFAULT_TEXT.split(" |\\\n");
+        int wordCount = words.length;
+
+        List<String> uniqWords = new ArrayList<>();
+        for(String w : words){
+            uniqWords.add(FilterWords(w));
+        }
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String w : uniqWords) {
+            Integer n = map.get(w);
+            n = (n == null) ? 1 : ++n;
+            map.put(w, n);
+        }
+
+        taOutput.setText(map.toString().replace(", ", "\n"));
+
+
+
     }
 
     @FXML
@@ -132,7 +139,9 @@ public class WoordenController implements Initializable {
          throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-
+    public String FilterWords(String word){
+        return word.replaceAll("\\W", "");
+    }
 
    
 }
