@@ -9,9 +9,7 @@ package woordenapplicatie.gui;
 
 
 import java.net.URL;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,7 +86,40 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        String output = "";
+        String[] words = DEFAULT_TEXT.split(" |\\\n");
+        Set<String> uniqWords = new TreeSet<>(
+            new Comparator<String>() {
+                public int compare(String i1,String i2)
+                {
+                    return i2.compareTo(i1);
+                }
+            }
+        );
+
+
+        for(String w : words){
+            uniqWords.add(w.replaceAll("\\W", ""));
+        }
+
+        for (String uw : uniqWords){
+            output +=  uw +"\n";
+        }
+
+
+        taOutput.setText(output);
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @FXML
@@ -100,5 +131,8 @@ public class WoordenController implements Initializable {
     private void concordatieAction(ActionEvent event) {
          throw new UnsupportedOperationException("Not supported yet."); 
     }
+
+
+
    
 }
