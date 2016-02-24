@@ -65,7 +65,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void aantalAction(ActionEvent event) {
         String output = "";
-         String[] words = DEFAULT_TEXT.split(" |\\\n");
+         String[] words = splitString(DEFAULT_TEXT);
          int wordCount = words.length;
 
         output += "Aantal woorden: " +wordCount + "\n";
@@ -87,7 +87,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void sorteerAction(ActionEvent event) {
         String output = "";
-        String[] words = DEFAULT_TEXT.split(" |\\\n");
+        String[] words = splitString(DEFAULT_TEXT);
         Set<String> uniqWords = new TreeSet<>(
             new Comparator<String>() {
                 public int compare(String i1,String i2)
@@ -113,7 +113,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void frequentieAction(ActionEvent event) {
         String output = "";
-        String[] words = DEFAULT_TEXT.split(" |\\\n");
+        String[] words = splitString(DEFAULT_TEXT);
         int wordCount = words.length;
 
         List<String> uniqWords = new ArrayList<>();
@@ -141,6 +141,9 @@ public class WoordenController implements Initializable {
 
     public String FilterWords(String word){
         return word.replaceAll("\\W", "");
+    }
+    public String[] splitString(String string){
+        return string.split("\\s+|\\\n");
     }
 
    
