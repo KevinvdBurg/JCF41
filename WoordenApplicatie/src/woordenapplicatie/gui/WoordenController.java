@@ -9,7 +9,10 @@ package woordenapplicatie.gui;
 
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,7 +66,24 @@ public class WoordenController implements Initializable {
     
     @FXML
     private void aantalAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+        String output = "";
+         String[] words = DEFAULT_TEXT.split(" |\\\n");
+         int wordCount = words.length;
+
+        output += "Aantal woorden: " +wordCount + "\n";
+
+
+        Set<String> uniqWords = new HashSet<>();
+
+        for(String w : words){
+            uniqWords.add(w.replaceAll("\\W", ""));
+        }
+
+
+
+        output += "Aantal Uniq woorden: " + uniqWords.size();
+
+        taOutput.setText(output);
     }
 
     @FXML
