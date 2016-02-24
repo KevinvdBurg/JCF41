@@ -74,7 +74,7 @@ public class WoordenController implements Initializable {
         Set<String> uniqWords = new HashSet<>();
 
         for(String w : words){
-            uniqWords.add(FilterWords(w));
+            uniqWords.add(filterWords(w));
         }
 
 
@@ -99,7 +99,7 @@ public class WoordenController implements Initializable {
 
 
         for(String w : words){
-            uniqWords.add(FilterWords(w));
+            uniqWords.add(filterWords(w));
         }
 
         for (String uw : uniqWords){
@@ -112,19 +112,17 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-        String output = "";
         String[] words = splitString(DEFAULT_TEXT);
-        int wordCount = words.length;
 
         List<String> uniqWords = new ArrayList<>();
         for(String w : words){
-            uniqWords.add(FilterWords(w));
+            uniqWords.add(filterWords(w));
         }
 
         Map<String, Integer> map = new HashMap<>();
         for (String w : uniqWords) {
             Integer n = map.get(w);
-            n = (n == null) ? 1 : ++n;
+            n = n == null ? 1 : ++n;
             map.put(w, n);
         }
 
@@ -136,11 +134,33 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+         String[] rules = DEFAULT_TEXT.split("\\\n");
+        String[] words = splitString(DEFAULT_TEXT);
+        int wordCount = words.length;
+
+        Map<String, List<Integer>> map = new HashMap<>();
+        for(String w : words){
+            map.put(filterWords(w), new ArrayList<>());
+        }
+
+        for (String key : map.keySet())
+        {
+            List<Integer> list = new ArrayList<>();
+            int ruleNumber = 1;
+            for (String rule : rules) {
+                if(rule.toLowerCase().replaceAll("é", "e").indexOf(key) != -1)
+                    list.add(ruleNumber);
+
+                ruleNumber++;
+            }
+            map.put(key, list);
+        }
+
+        taOutput.setText(map.toString().replaceAll(", (?!\\d)", "\n"));
     }
 
-    public String FilterWords(String word){
-        return word.replaceAll("\\W", "");
+    public String filterWords(String word){
+        return word.toLowerCase().replaceAll("é", "e").replaceAll("\\W", "");
     }
     public String[] splitString(String string){
         return string.split("\\s+|\\\n");
