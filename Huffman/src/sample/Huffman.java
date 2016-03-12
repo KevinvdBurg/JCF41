@@ -32,7 +32,7 @@ public class Huffman
 
         //Adds all entry form the map to the nodes, addAll is why faster than a for loop
         nodes.addAll(map.entrySet().stream().map(entry -> new Knot(entry.getKey(), entry.getValue())).collect(Collectors.toList()));
-        //nodes.sort(null); //This can sort the list before the queue
+        nodes.sort(null); //This can sort the list before the queue
 
 
         PriorityQueue<Knot> queue = new PriorityQueue(new Comparator<Knot>() {

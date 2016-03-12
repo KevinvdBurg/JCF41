@@ -13,27 +13,24 @@ public class Controller {
             "Gingerbread tiramisu wafer cake jelly beans dessert jelly beans chocolate cake. Powder ice cream apple pie " +
             "sesame snaps gummi bears sweet caramels croissant. Wafer jelly carrot cake pie powder caramels soufflé " +
             "icing bonbon. Powder gummies carrot cake bonbon cheesecake tiramisu macaroon.";
+
     @FXML
-    public Button btnFrequency;
-    @FXML
-    public Button btnFrequencySort;
+    public Button btnDoTheThing;
     @FXML
     public TextArea taOutput;
 
 
     @FXML
-    public void getFrequency(ActionEvent actionEvent) {
+    public void actionDoTheThing(ActionEvent actionEvent) {
 
-        //Split all the characters into a Array
+        //Split all the characters into a CharArray
         char[] letters = text.toCharArray();
 
         Huffman huffman = new Huffman(letters);
 
-
-
-
-
     }
+
+
 }
 
 
