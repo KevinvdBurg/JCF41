@@ -5,27 +5,27 @@ import java.util.*;
 /**
  * Created by kvdb on 12/03/16.
  */
-public class Huffman implements Comparator
+public class Huffman
 {
-    private Map<String, Integer> map;
-    private Map<String, Integer> sortedMap;
+    private Map<Character, Integer> map;
+    private Map<Character, Integer> sortedMap;
 
-    public Huffman(String[] words)
+    public Huffman(char[] letters)
     {
         map = new TreeMap<>();
 
-        setMap(words);
+        setMap(letters);
     }
 
-    public Map<String, Integer> getMap()
+    public Map<Character, Integer> getMap()
     {
         return map;
     }
 
-    public void setMap(String[] words)
+    public void setMap(char[] letters)
     {
         //Get all unique characters frequency and put then in a TreeMap(map)
-        for (String w : words) {
+        for (char w : letters) {
             Integer n = map.get(w);
             n = (n == null) ? 1 : ++n;
             map.put(w, n);
@@ -36,17 +36,12 @@ public class Huffman implements Comparator
         Object[] set = map.entrySet().toArray();
         Arrays.sort(set, new Comparator() {
                 public int compare(Object o1, Object o2) {
-                    return ((Map.Entry<String, Integer>) o2).getValue().compareTo(
-                            ((Map.Entry<String, Integer>) o1).getValue());
+                    return ((Map.Entry<Character, Integer>) o2).getValue().compareTo(
+                            ((Map.Entry<Character, Integer>) o1).getValue());
                 }
             });
         return set;
 
     }
 
-    @Override
-    public int compare(Object o1, Object o2)
-    {
-        return ((Map.Entry<String, Integer>) o2).getValue().compareTo(((Map.Entry<String, Integer>) o1).getValue());
-    }
 }

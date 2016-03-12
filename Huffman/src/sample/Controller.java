@@ -27,40 +27,21 @@ public class Controller {
     public void getFrequency(ActionEvent actionEvent) {
 
         //Split all the characters into a Array
-        String[] words = splitString(text);
+        char[] letters = text.toCharArray();
 
-        Huffman huffman = new Huffman(words);
+        Huffman huffman = new Huffman(letters);
 
 
-        Map<String, Integer>  map = huffman.getMap();
-        //printMap(map);
+        Map<Character, Integer> map = huffman.getMap();
 
         //--------Sort in Desc order--------\\
         Object[] a = huffman.getSortedMap();
 
         for (Object e : a) {
-            System.out.println(((Map.Entry<String, Integer>) e).getKey() + " : "
-                    + ((Map.Entry<String, Integer>) e).getValue());
-        }
-
-
-    }
-
-
-    public static String[] splitString(String string){
-        //Split in noting to separate every characters
-        return string.split("");
-    }
-
-    public void printMap(Map<String, Integer> map) {
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println("Key : " + entry.getKey()
-                    + " Value : " + entry.getValue());
+            System.out.println(((Map.Entry<Character, Integer>) e).getKey() + " : "
+                    + ((Map.Entry<Character, Integer>) e).getValue());
         }
     }
-
-
-
 }
 
 
