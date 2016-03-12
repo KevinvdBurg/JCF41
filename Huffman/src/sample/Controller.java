@@ -28,22 +28,11 @@ public class Controller {
         char[] letters = text.toCharArray();
 
         Huffman huffman = new Huffman(letters);
-        huffman.getNodes();
-
-        Map<Character, Integer> map = huffman.getMap();
 
 
-        for(Knot knot : huffman.getNodes()){
-            System.out.println(knot.letter + " : " + knot.frequentie);
-        }
 
-        //--------Sort in Desc order--------\\
-        //Object[] a = huffman.getSortedMap();
 
-//        for (Map.Entry<Character, Integer> entry : huffman.getSortedMap().entrySet())
-//        {
-//            System.out.println(entry.getKey() + "/" + entry.getValue());
-//        }
+
     }
 }
 

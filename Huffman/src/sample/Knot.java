@@ -12,6 +12,10 @@ public class Knot implements Comparable
     public Knot left;
     public Knot right;
 
+    public Knot(){
+
+    }
+
     public Knot(char letter)
     {
         this.letter = letter;

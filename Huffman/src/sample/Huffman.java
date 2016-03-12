@@ -1,5 +1,7 @@
 package sample;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,8 +11,6 @@ import java.util.stream.Collectors;
 public class Huffman
 {
     private Map<Character, Integer> map;
-    private Map<Character, Integer> sortedMap;
-
     private List<Knot> nodes = new ArrayList<Knot>();
 
     public Huffman(char[] letters)
@@ -20,10 +20,6 @@ public class Huffman
         setMap(letters);
     }
 
-    public Map<Character, Integer> getMap()
-    {
-        return map;
-    }
 
     public void setMap(char[] letters)
     {
@@ -34,12 +30,12 @@ public class Huffman
             map.put(w, n);
         }
 
-        //Adds all entrys form the map to the nodes
+        //Adds all entry form the map to the nodes, addAll is why faster than a for loop
         nodes.addAll(map.entrySet().stream().map(entry -> new Knot(entry.getKey(), entry.getValue())).collect(Collectors.toList()));
-        //nodes.sort(null);
+        //nodes.sort(null); //This can sort the list before the queue
 
 
-        PriorityQueue queue = new PriorityQueue<>(new Comparator<Knot>() {
+        PriorityQueue<Knot> queue = new PriorityQueue(new Comparator<Knot>() {
 
             @Override
             public int compare(Knot o1, Knot o2)
@@ -60,16 +56,16 @@ public class Huffman
 
         });
 
+        //Adds all the Knots to the PriorityQueue Sorted
         queue.addAll(nodes);
-        System.out.println(queue.toArray().toString());
+
+        System.out.println(queue);
+
 
     }
-
-    public static PriorityQueue<Knot> sortPriorityQueue(PriorityQueue<Knot> huffQ)
+    public Map<Character, Integer> getMap()
     {
-        PriorityQueue<Knot> sortedQueue = new PriorityQueue<Knot>();
-        sortedQueue.addAll(huffQ);
-        return sortedQueue;
+        return map;
     }
 
     public List<Knot> getNodes()
@@ -77,15 +73,13 @@ public class Huffman
         return nodes;
     }
 
-    public Map<Character, Integer> getSortedMap(){
-        Collections.sort((List) map, new Comparator() {
-                public int compare(Object o1, Object o2) {
-                    return ((Map.Entry<Character, Integer>) o2).getValue().compareTo(
-                            ((Map.Entry<Character, Integer>) o1).getValue());
-                }
-            });
-        return map;
+    /* TODO
+    * Add making the huffman tree
+    * Incode the message with huffman
+    * Decode the message with huffman
+    *
+    * */
 
-    }
+
 
 }
