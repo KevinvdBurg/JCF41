@@ -21,8 +21,6 @@ public class Controller {
     public TextArea taOutput;
 
 
-
-
     @FXML
     public void getFrequency(ActionEvent actionEvent) {
 
@@ -30,17 +28,22 @@ public class Controller {
         char[] letters = text.toCharArray();
 
         Huffman huffman = new Huffman(letters);
-
+        huffman.getNodes();
 
         Map<Character, Integer> map = huffman.getMap();
 
-        //--------Sort in Desc order--------\\
-        Object[] a = huffman.getSortedMap();
 
-        for (Object e : a) {
-            System.out.println(((Map.Entry<Character, Integer>) e).getKey() + " : "
-                    + ((Map.Entry<Character, Integer>) e).getValue());
+        for(Knot knot : huffman.getNodes()){
+            System.out.println(knot.letter + " : " + knot.frequentie);
         }
+
+        //--------Sort in Desc order--------\\
+        //Object[] a = huffman.getSortedMap();
+
+//        for (Map.Entry<Character, Integer> entry : huffman.getSortedMap().entrySet())
+//        {
+//            System.out.println(entry.getKey() + "/" + entry.getValue());
+//        }
     }
 }
 
