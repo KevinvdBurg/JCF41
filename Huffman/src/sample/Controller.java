@@ -28,6 +28,10 @@ public class Controller {
 
         Huffman huffman = new Huffman(letters);
 
+        huffman.buildTree();
+        huffman.buildCharacterCodes();
+        return;
+
     }
 
 

@@ -7,10 +7,13 @@ import java.util.Comparator;
  */
 public class Knot implements Comparable
 {
+    public static int LEFT = 0;
+    public static int RIGHT = 1;
+
     public char letter;
     public int frequentie;
-    public Knot left;
-    public Knot right;
+    private Knot leftKnot;
+    private Knot rightKnot;
 
     public Knot(){
 
@@ -19,6 +22,7 @@ public class Knot implements Comparable
     public Knot(char letter)
     {
         this.letter = letter;
+        this.frequentie = 0;
     }
 
     public Knot(char letter, int frequentie)
@@ -42,6 +46,22 @@ public class Knot implements Comparable
         {
             return 0;
         }
+    }
+
+    public Knot getRightKnot() {
+        return rightKnot;
+    }
+
+    public void setRightKnot(Knot rightKnot) {
+        this.rightKnot = rightKnot;
+    }
+
+    public Knot getLeftKnot() {
+        return leftKnot;
+    }
+
+    public void setLeftKnot(Knot leftKnot) {
+        this.leftKnot = leftKnot;
     }
 }
 
