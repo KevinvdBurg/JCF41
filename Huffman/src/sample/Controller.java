@@ -30,6 +30,8 @@ public class Controller {
 
         huffman.buildTree();
         huffman.buildCharacterCodes();
+
+        huffman.encodeText();
         return;
 
     }

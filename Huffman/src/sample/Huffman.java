@@ -16,13 +16,14 @@ public class Huffman
     private PriorityQueue<Knot> knotQueue;
     private Knot treeRoot;
     private Map<Character, String> characterCodes;
+    private char[] chars;
 
     public Huffman(char[] letters)
     {
         characterCodes = new HashMap<>();
         treeRoot = new Knot();
         map = new TreeMap<>();
-
+        chars = letters;
         setMap(letters);
     }
 
@@ -150,5 +151,25 @@ public class Huffman
         else {
             characterCodes.put(knot.letter, currentCode);
         }
+
     }
+    /**
+     * Encodes the text that is currently in the huffman tree
+     *
+     */
+    public String encodeText(){
+        //Creates a empty result
+        String result = "";
+        for (Character c : chars){
+
+            result += characterCodes.get(c); // Gets the value of that character in the characterCodes map.
+        }
+
+        System.out.println(result); //prints result in the console
+        return result; //returns the value(string)
+    }
+
+
+
+
 }
