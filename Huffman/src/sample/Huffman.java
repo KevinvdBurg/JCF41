@@ -18,20 +18,20 @@ public class Huffman
     private Map<Character, String> characterCodes;
     private char[] chars;
 
-    public Huffman(char[] letters)
+    public Huffman(char[] characters)
     {
         characterCodes = new HashMap<>();
         treeRoot = new Knot();
         map = new TreeMap<>();
-        chars = letters;
-        setMap(letters);
+        chars = characters;
+        setMap(characters);
     }
 
 
-    public void setMap(char[] letters)
+    public void setMap(char[] characters)
     {
         //Get all unique characters frequency and put then in a TreeMap(map)
-        for (char w : letters) {
+        for (char w : characters) {
             Integer n = map.get(w);
             n = (n == null) ? 1 : ++n;
             map.put(w, n);
@@ -47,11 +47,11 @@ public class Huffman
             @Override
             public int compare(Knot o1, Knot o2)
             {
-                if (o1.frequentie < o2.frequentie)
+                if (o1.frequency < o2.frequency)
                 {
                     return 1;
                 }
-                else if (o1.frequentie > o2.frequentie)
+                else if (o1.frequency > o2.frequency)
                 {
                     return -1;
                 }
@@ -82,12 +82,6 @@ public class Huffman
         return nodes;
     }
 
-    /* TODO
-    * Add making the huffman tree
-    * Incode the message with huffman
-    * Decode the message with huffman
-    *
-    * */
 
     /**
      * Method which builds a Huffman tree based on the knotQueue
@@ -112,10 +106,10 @@ public class Huffman
             //Create a new knot which serves as a link containing 2 other knots
             frequencyKnot = new Knot();
             frequencyKnot.setLeftKnot(leftKnot);
-            frequencyKnot.frequentie = leftKnot.frequentie;
+            frequencyKnot.frequency = leftKnot.frequency;
 
             frequencyKnot.setRightKnot(rightKnot);
-            frequencyKnot.frequentie += rightKnot.frequentie;
+            frequencyKnot.frequency += rightKnot.frequency;
 
             //Put the knot back into the queue so it can be picked up to add to the tree
             knotQueue.add(frequencyKnot);
@@ -144,18 +138,20 @@ public class Huffman
             return;
 
         //If the knot doesnt contain a character call the method on it's children
-        if(knot.letter == (char) 0) {
+        if(knot.character == (char) 0) {
             buildKnotCode(knot.getLeftKnot(), currentCode + knot.LEFT);
             buildKnotCode(knot.getRightKnot(), currentCode + knot.RIGHT);
         }
         else {
-            characterCodes.put(knot.letter, currentCode);
+            characterCodes.put(knot.character, currentCode);
         }
 
     }
+
+
     /**
      * Encodes the text that is currently in the huffman tree
-     *
+     * @return
      */
     public String encodeText(){
         //Creates a empty result
@@ -167,6 +163,36 @@ public class Huffman
 
         System.out.println(result); //prints result in the console
         return result; //returns the value(string)
+    }
+
+    /**
+     * Method to decode a string with encoded text
+     * @param code
+     * @return
+     */
+    public String decodeText(String code)
+    {
+        String result = "";
+        Knot knot = treeRoot;
+
+        //Loop over the given code
+        for(int i = 0; i < code.length(); i++)
+        {
+            //Get the direction and the knot in which that direction results
+            int direction = Character.getNumericValue(code.charAt(i));
+            if(direction == Knot.LEFT)
+                knot = knot.getLeftKnot();
+            else if(direction == Knot.RIGHT)
+                knot = knot.getRightKnot();
+
+            //Check if the knot has a character, if it does add that character to the result and go back to the root
+            if(knot.character != (char) 0)
+            {
+                result += knot.character;
+                knot = treeRoot;
+            }
+        }
+        return result;
     }
 
 

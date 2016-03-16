@@ -31,7 +31,7 @@ public class Controller {
         huffman.buildTree();
         huffman.buildCharacterCodes();
 
-        huffman.encodeText();
+        System.out.println(huffman.decodeText(huffman.encodeText()));
         return;
 
     }
