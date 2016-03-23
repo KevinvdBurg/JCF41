@@ -23,6 +23,7 @@ public class Huffman
         characterCodes = new HashMap<>();
         treeRoot = new Knot();
         map = new TreeMap<>();
+        knotQueue = new PriorityQueue<>();
         chars = characters;
         setMap(characters);
     }
@@ -39,36 +40,13 @@ public class Huffman
 
         //Adds all entry form the map to the nodes, addAll is why faster than a for loop
         nodes.addAll(map.entrySet().stream().map(entry -> new Knot(entry.getKey(), entry.getValue())).collect(Collectors.toList()));
-        nodes.sort(null); //This can sort the list before the queue
 
-
-        PriorityQueue<Knot> queue = new PriorityQueue(new Comparator<Knot>() {
-
-            @Override
-            public int compare(Knot o1, Knot o2)
-            {
-                if (o1.frequency < o2.frequency)
-                {
-                    return 1;
-                }
-                else if (o1.frequency > o2.frequency)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-
-        });
 
         //Adds all the Knots to the PriorityQueue Sorted
-        queue.addAll(nodes);
+        knotQueue.addAll(nodes);
 
-        knotQueue = queue;
 
-        System.out.println(queue);
+        System.out.println(knotQueue);
 
 
     }
@@ -159,6 +137,7 @@ public class Huffman
         for (Character c : chars){
 
             result += characterCodes.get(c); // Gets the value of that character in the characterCodes map.
+            result += " ";
         }
 
         System.out.println(result); //prints result in the console

@@ -28,13 +28,13 @@ public class Controller {
         huffman.buildTree();
         huffman.buildCharacterCodes();
 
-        try {
-            System.out.println(Serializer.serialize(text).length);
-
-        } catch (Exception e) {
-
-        }
-        Long interge = Long.parseLong(huffman.encodeText());
+//        try {
+//            System.out.println(Serializer.serialize(text).length);
+//
+//        } catch (Exception e) {
+//
+//        }
+//        Long interge = Long.parseLong(huffman.encodeText());
         System.out.println(huffman.decodeText(huffman.encodeText()));
         return;
 
