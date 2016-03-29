@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class School
     {
         this.name = name;
         this.location = location;
+        this.subjectList = new ArrayList<>();
     }
 
     public School(String name, String location, List<Subject> subjectList)
@@ -22,6 +24,11 @@ public class School
         this.name = name;
         this.location = location;
         this.subjectList = subjectList;
+    }
+
+    public List<Subject> getSubjectList()
+    {
+        return subjectList;
     }
 
     public String getName()

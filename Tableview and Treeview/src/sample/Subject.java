@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +14,23 @@ public class Subject
     public Subject(String name)
     {
         this.name = name;
+        this.teacherList = new ArrayList<>();
     }
 
     public Subject(String name, List<Teacher> teacherList)
     {
         this.name = name;
         this.teacherList = teacherList;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public List<Teacher> getTeacherList()
+    {
+        return teacherList;
     }
 
     public void addTeacherToSubject(Teacher newTeacher){

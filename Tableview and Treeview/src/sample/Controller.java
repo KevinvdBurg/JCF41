@@ -5,6 +5,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.StackPane;
 
 import javax.annotation.Resources;
 import java.net.URL;
@@ -18,24 +19,33 @@ public class Controller {
     @FXML
     public TableView<Teacher> tableTeachers;
 
+//    @FXML
+//    public StackPane<String> treeSchools;
     @FXML
-    public TreeView<School> treeSchools;
+    public StackPane planeSchools;
 
 
     @FXML
     protected void initialize(){
-        School fontysAlgemeen = new School("Fontys Algemeen", "Eindhoven");
-        TreeItem<School> root = new TreeItem<School>(fontysAlgemeen);
-        root.setExpanded(true);
+        setUpDefaultSchool();
 
-
-        for (School school : defaultSchool){
-            TreeItem<School> tiSchool = new TreeItem<>();
-            tiSchool.setValue(school);
-            root.getChildren().add(tiSchool);
+        TreeItem<String> rootItem = new TreeItem<String> ("Schools");
+        rootItem.setExpanded(true);
+        for(School school : defaultSchool){
+            TreeItem<String> item = new TreeItem<String> (school.getName());
+                for (Subject subject : school.getSubjectList()){
+                    TreeItem<String> item2 = new TreeItem<String> (subject.getName());
+                    for (Teacher teacher : subject.getTeacherList()) {
+                        TreeItem<String> item3 = new TreeItem<String> (teacher.getName());
+                        item2.getChildren().add(item3);
+                    }
+                    item.getChildren().add(item2);
+                }
+            rootItem.getChildren().add(item);
         }
 
-        treeSchools.setRoot(root);
+        TreeView<String> tree = new TreeView<String> (rootItem);
+        planeSchools.getChildren().add(tree);
 
     }
 
