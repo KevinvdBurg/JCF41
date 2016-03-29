@@ -17,35 +17,35 @@ import java.util.List;
 
 public class Controller {
 
-    private ArrayList<School> defaultSchool = new ArrayList<>();
+    //Required attributes for the teachers tableView
     private ObservableList<Teacher> teachers;
-
     @FXML
     public TableView<Teacher> tableTeachers;
-
     @FXML
     public TableColumn teacherNameCol;
-
     @FXML
     public TableColumn teacherLastNameCol;
-
     @FXML
     public TableColumn teacherAgeCol;
-
     @FXML
     public TableColumn teacherGenderCol;
 
+    //Required attributes for the schools treeView
+    private ArrayList<School> defaultSchool = new ArrayList<>();
     @FXML
     public StackPane planeSchools;
 
 
     @FXML
     protected void initialize(){
+
+        //Bind values to the tableView columns
         teacherNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("name"));
         teacherLastNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("lastName"));
         teacherAgeCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("age"));
         teacherGenderCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("gender"));
 
+        //Initialize observableList and bind it to the tableView
         teachers = FXCollections.observableArrayList();
         tableTeachers.setItems(teachers);
 
@@ -53,6 +53,7 @@ public class Controller {
 
         TreeItem<String> rootItem = new TreeItem<String> ("Schools");
         rootItem.setExpanded(true);
+        rootItem.getChildren().setAll();
         for(School school : defaultSchool){
             TreeItem<String> item = new TreeItem<String> (school.getName());
                 for (Subject subject : school.getSubjectList()){
