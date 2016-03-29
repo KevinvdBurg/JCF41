@@ -24,7 +24,7 @@
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
-            <TreeView id="treeClasses" fx:id="treeClasses" layoutX="14.0" layoutY="39.0" prefHeight="414.0" prefWidth="156.0" />
+            <TreeView id="treeClasses" fx:id="treeSchools" layoutX="14.0" layoutY="39.0" prefHeight="414.0" prefWidth="156.0" />
             <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="156.0" text="Classes" />
             <Label layoutX="180.0" layoutY="14.0" prefHeight="17.0" prefWidth="275.0" text="Teachers" />
          </children>
