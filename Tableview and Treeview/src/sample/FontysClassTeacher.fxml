@@ -16,17 +16,19 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="474.0" prefWidth="485.0">
+      <Pane prefHeight="474.0" prefWidth="592.0">
          <children>
-            <TableView id="tableTeachers" fx:id="tableTeachers" layoutX="180.0" layoutY="38.0" prefHeight="414.0" prefWidth="275.0">
+            <TableView id="tableTeachers" fx:id="tableTeachers" layoutX="180.0" layoutY="38.0" prefHeight="414.0" prefWidth="405.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="teacherNameCol" prefWidth="145.0" text="Name" />
+                <TableColumn fx:id="teacherLastNameCol" minWidth="5.0" prefWidth="123.0" text="Last name" />
+                  <TableColumn fx:id="teacherAgeCol" minWidth="6.0" prefWidth="65.0" text="Age" />
+                  <TableColumn fx:id="teacherGenderCol" prefWidth="69.0" text="Gender" />
               </columns>
             </TableView>
-            <TreeView id="treeClasses" fx:id="treeSchools" layoutX="14.0" layoutY="39.0" prefHeight="414.0" prefWidth="156.0" />
             <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="156.0" text="Classes" />
             <Label layoutX="180.0" layoutY="14.0" prefHeight="17.0" prefWidth="275.0" text="Teachers" />
+            <StackPane fx:id="planeSchools" layoutX="14.0" layoutY="38.0" prefHeight="414.0" prefWidth="156.0" />
          </children>
       </Pane>
    </children>

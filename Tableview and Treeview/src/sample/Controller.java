@@ -1,10 +1,13 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 import javax.annotation.Resources;
@@ -15,18 +18,37 @@ import java.util.List;
 public class Controller {
 
     private ArrayList<School> defaultSchool = new ArrayList<>();
+    private ObservableList<Teacher> teachers;
 
     @FXML
     public TableView<Teacher> tableTeachers;
 
-//    @FXML
-//    public StackPane<String> treeSchools;
+    @FXML
+    public TableColumn teacherNameCol;
+
+    @FXML
+    public TableColumn teacherLastNameCol;
+
+    @FXML
+    public TableColumn teacherAgeCol;
+
+    @FXML
+    public TableColumn teacherGenderCol;
+
     @FXML
     public StackPane planeSchools;
 
 
     @FXML
     protected void initialize(){
+        teacherNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("name"));
+        teacherLastNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("lastName"));
+        teacherAgeCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("age"));
+        teacherGenderCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("gender"));
+
+        teachers = FXCollections.observableArrayList();
+        tableTeachers.setItems(teachers);
+
         setUpDefaultSchool();
 
         TreeItem<String> rootItem = new TreeItem<String> ("Schools");
