@@ -41,6 +41,7 @@ public class Controller {
 
     @FXML
     protected void initialize(){
+        School fontysAlgemeen= new School("Fontys Algemeen", "Tilburg");
         teacherNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("name"));
         teacherLastNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("lastName"));
         teacherAgeCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("age"));
@@ -51,22 +52,19 @@ public class Controller {
 
         setUpDefaultSchool();
 
-        TreeItem<String> rootItem = new TreeItem<String> ("Schools");
+        TreeItem<School> rootItem = new TreeItem<School> (fontysAlgemeen);
+//        rootItem.addEventHandler();
         rootItem.setExpanded(true);
         for(School school : defaultSchool){
-            TreeItem<String> item = new TreeItem<String> (school.getName());
+            TreeItem<School> item = new TreeItem<School> (school);
                 for (Subject subject : school.getSubjectList()){
-                    TreeItem<String> item2 = new TreeItem<String> (subject.getName());
-                    for (Teacher teacher : subject.getTeacherList()) {
-                        TreeItem<String> item3 = new TreeItem<String> (teacher.getName());
-                        item2.getChildren().add(item3);
-                    }
-                    item.getChildren().add(item2);
+                    TreeItem<Subject> item2 = new TreeItem<Subject> (subject);
+                    //item.getChildren().add(item2);
                 }
             rootItem.getChildren().add(item);
         }
 
-        TreeView<String> tree = new TreeView<String> (rootItem);
+        TreeView<School> tree = new TreeView<School> (rootItem);
         planeSchools.getChildren().add(tree);
 
     }

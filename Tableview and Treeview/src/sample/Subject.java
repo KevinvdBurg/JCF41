@@ -23,6 +23,7 @@ public class Subject
         this.teacherList = teacherList;
     }
 
+
     public String getName()
     {
         return name;
@@ -35,5 +36,11 @@ public class Subject
 
     public void addTeacherToSubject(Teacher newTeacher){
         teacherList.add(newTeacher);
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }

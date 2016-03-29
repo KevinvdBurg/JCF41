@@ -45,4 +45,10 @@ public class School
         subjectList.add(newSubject);
 
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }
