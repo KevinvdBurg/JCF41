@@ -13,8 +13,7 @@ public class Teacher
     public SimpleIntegerProperty age;
     public SimpleIntegerProperty gender;
 
-    public Teacher(String name, String lastName, int age, int gender)
-    {
+    public Teacher(String name, String lastName, int age, int gender) {
         this.name = new SimpleStringProperty(name);
         this.lastName = new SimpleStringProperty(lastName);
         this.age = new SimpleIntegerProperty(age);

@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,37 +53,72 @@ public class Controller {
 
         setUpDefaultSchool();
 
-        TreeItem<School> rootItem = new TreeItem<School> (fontysAlgemeen);
-//        rootItem.addEventHandler();
-        rootItem.setExpanded(true);
-        rootItem.getChildren().setAll();
+        //createted the root of the Treeview
+        TreeItem<Nameable> rootItem = new TreeItem<> (fontysAlgemeen);
+        rootItem.setExpanded(true); //made so that the root is expanded automatich
+        //loop though the defaultschool to fill in the treeview
         for(School school : defaultSchool){
-            TreeItem<School> item = new TreeItem<School> (school);
+            TreeItem<Nameable> item = new TreeItem<> (school);
                 for (Subject subject : school.getSubjectList()){
-                    TreeItem<Subject> item2 = new TreeItem<Subject> (subject);
-                    //item.getChildren().add(item2);
+                    TreeItem<Nameable> item2 = new TreeItem<> (subject);
+                    item.getChildren().add(item2);
                 }
             rootItem.getChildren().add(item);
         }
 
-        TreeView<School> tree = new TreeView<School> (rootItem);
+        //Creates the treeview and adds it to the StackPlane
+        TreeView<Nameable> tree = new TreeView<> (rootItem);
         planeSchools.getChildren().add(tree);
 
+        //Adds a listener to the treeview so it knows what item is selected
+        tree.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue,
+                                Object newValue) {
+
+                TreeItem<Nameable> selectedItem = (TreeItem<Nameable>) newValue;
+                teachers.setAll(selectedItem.getValue().getTeachers()); // sets the teachers to the tableview
+            }
+
+        });
     }
 
+    /*
+    *
+    * Sets all the default schools with all the subjects and teachers
+    *
+     */
     private void setUpDefaultSchool(){
         School fontysTilburg = new School("Fontys Tilburg", "Tilburg");
         School fontysEindhoven = new School("Fontys Eindhoven", "Eindhoven");
 
         Subject jcf = new Subject("JCF");
+        Subject gso = new Subject("GSO");
+        Subject pts4 = new Subject("PTS4");
 
         Teacher hmls = new Teacher("Bjorn", "Hamels", 18, 1);
         Teacher beer = new Teacher("Patick", "de Beer", 45, 1);
+
+        Teacher mols = new Teacher("Erik", "Mols", 53, 2);
+        Teacher roij = new Teacher("Jacques", "de Roij", 23, 1);
+
+        Teacher burg = new Teacher("Kevin", "van der Burg", 23, 2);
+        Teacher drost = new Teacher("Martin", "Drost", 22, 1);
+
         jcf.addTeacherToSubject(hmls);
         jcf.addTeacherToSubject(beer);
 
+        gso.addTeacherToSubject(mols);
+        gso.addTeacherToSubject(roij);
+
+        pts4.addTeacherToSubject(burg);
+        pts4.addTeacherToSubject(drost);
+
         fontysTilburg.addSubjectToSchool(jcf);
+        fontysTilburg.addSubjectToSchool(gso);
         fontysEindhoven.addSubjectToSchool(jcf);
+        fontysEindhoven.addSubjectToSchool(pts4);
 
         defaultSchool.add(fontysTilburg);
         defaultSchool.add(fontysEindhoven);

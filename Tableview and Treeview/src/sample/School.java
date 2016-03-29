@@ -6,24 +6,16 @@ import java.util.List;
 /**
  * Created by kvdb on 23/03/16.
  */
-public class School
+public class School implements Nameable
 {
     private String name;
     private String location;
     private List<Subject> subjectList;
 
-    public School(String name, String location)
-    {
+    public School(String name, String location) {
         this.name = name;
         this.location = location;
         this.subjectList = new ArrayList<>();
-    }
-
-    public School(String name, String location, List<Subject> subjectList)
-    {
-        this.name = name;
-        this.location = location;
-        this.subjectList = subjectList;
     }
 
     public List<Subject> getSubjectList()
@@ -31,6 +23,7 @@ public class School
         return subjectList;
     }
 
+    @Override
     public String getName()
     {
         return name;
@@ -43,12 +36,20 @@ public class School
 
     public void addSubjectToSchool(Subject newSubject){
         subjectList.add(newSubject);
-
     }
 
     @Override
     public String toString()
     {
         return name;
+    }
+
+    @Override
+    public ArrayList<Teacher> getTeachers() {
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        for (Subject subject : subjectList){
+            teachers.addAll(subject.getTeachers());
+        }
+        return teachers;
     }
 }
