@@ -8,6 +8,5 @@ import java.util.ArrayList;
  */
 public interface Nameable
 {
-    String getName();
     ArrayList<Teacher> getTeachers();
 }

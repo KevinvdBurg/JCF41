@@ -26,7 +26,6 @@ public class Subject implements Nameable
         return name;
     }
 
-    @Override
     public String getName() {
         return name;
     }

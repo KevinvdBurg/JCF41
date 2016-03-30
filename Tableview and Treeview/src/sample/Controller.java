@@ -65,10 +65,14 @@ public class Controller {
         //loop though the defaultschool to fill in the treeview
         for(School school : defaultSchool){
             TreeItem<Nameable> item = new TreeItem<> (school);
-                for (Subject subject : school.getSubjectList()){
-                    TreeItem<Nameable> item2 = new TreeItem<> (subject);
-                    item.getChildren().add(item2);
+            for (Subject subject : school.getSubjectList()){
+                TreeItem<Nameable> item2 = new TreeItem<> (subject);
+                for (Teacher teacher : subject.getTeachers()){
+                    TreeItem<Nameable> item3 = new TreeItem<> (teacher);
+                    item2.getChildren().add(item3);
                 }
+                item.getChildren().add(item2);
+            }
             rootItem.getChildren().add(item);
         }
 
@@ -80,8 +84,7 @@ public class Controller {
         tree.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
 
             @Override
-            public void changed(ObservableValue observable, Object oldValue,
-                                Object newValue) {
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
                 TreeItem<Nameable> selectedItem = (TreeItem<Nameable>) newValue;
                 teachers.setAll(selectedItem.getValue().getTeachers()); // sets the teachers to the tableview

@@ -23,7 +23,6 @@ public class School implements Nameable
         return subjectList;
     }
 
-    @Override
     public String getName()
     {
         return name;

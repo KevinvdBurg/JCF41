@@ -5,17 +5,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 /**
  * Created by kvdb on 23/03/16.
  */
-public class Teacher
+public class Teacher implements Nameable
 {
     private SimpleStringProperty name;
     private SimpleStringProperty lastName;
     private SimpleIntegerProperty age;
     private SimpleIntegerProperty gender;
     private ImageView image;
-
+    
     public Teacher(String name, String lastName, int age, int gender) {
         this.name = new SimpleStringProperty(name);
         this.lastName = new SimpleStringProperty(lastName);
@@ -30,6 +32,14 @@ public class Teacher
 
     public String getName() {
         return name.get();
+    }
+
+    @Override
+    public ArrayList<Teacher> getTeachers()
+    {
+        ArrayList teacher = new ArrayList();
+        teacher.add(this);
+        return teacher;
     }
 
     public String getLastName() {
@@ -51,6 +61,6 @@ public class Teacher
     @Override
     public String toString()
     {
-        return name + " " + lastName;
+        return name.get();
     }
 }
