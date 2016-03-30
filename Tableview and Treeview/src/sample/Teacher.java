@@ -10,11 +10,11 @@ import javafx.scene.image.ImageView;
  */
 public class Teacher
 {
-    public SimpleStringProperty name;
-    public SimpleStringProperty lastName;
-    public SimpleIntegerProperty age;
-    public SimpleIntegerProperty gender;
-    public ImageView image;
+    private SimpleStringProperty name;
+    private SimpleStringProperty lastName;
+    private SimpleIntegerProperty age;
+    private SimpleIntegerProperty gender;
+    private ImageView image;
 
     public Teacher(String name, String lastName, int age, int gender) {
         this.name = new SimpleStringProperty(name);
