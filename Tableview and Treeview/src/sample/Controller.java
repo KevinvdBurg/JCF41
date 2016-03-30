@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 import javax.annotation.Resources;
@@ -31,6 +32,8 @@ public class Controller {
     public TableColumn teacherAgeCol;
     @FXML
     public TableColumn teacherGenderCol;
+    @FXML
+    public TableColumn teacherImageCol;
 
     //Required attributes for the schools treeView
     private ArrayList<School> defaultSchool = new ArrayList<>();
@@ -46,10 +49,13 @@ public class Controller {
         teacherLastNameCol.setCellValueFactory(new PropertyValueFactory<Teacher, String>("lastName"));
         teacherAgeCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("age"));
         teacherGenderCol.setCellValueFactory(new PropertyValueFactory<Teacher, Integer>("gender"));
+        teacherImageCol.setCellValueFactory(new PropertyValueFactory<Teacher, ImageView>("image"));
 
         //Initialize observableList and bind it to the tableView
         teachers = FXCollections.observableArrayList();
         tableTeachers.setItems(teachers);
+
+
 
         setUpDefaultSchool();
 
